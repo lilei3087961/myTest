@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	<LinearLayout 
+	       android:layout_width="match_parent"
+    	   android:layout_height="wrap_content"
+    	   android:orientation="horizontal"
+	    > 
+        <Button 
+            android:id="@+id/btn_show_pop"
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="@string/show_pop"
+    		android:onClick="showPop"
+            />
+        <Button 
+            android:id="@+id/btn_hid_pop"
+            android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:text="@string/hide_pop"
+    		android:onClick="hidePop"
+            />
+      </LinearLayout>  
+      
+      <LinearLayout
+ 	    android:id="@+id/content1"
+ 	    android:visibility="visible"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" />
+      <LinearLayout
+ 	    android:id="@+id/pop_view"
+ 	    android:visibility="visible"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+	    <LinearLayout 
+	    	android:layout_width="match_parent"
+	    	android:layout_height="wrap_content"
+	    	android:orientation="horizontal"
+	        >
+	        <Button 
+	            android:id="@+id/btn_set_camera"
+	            android:layout_weight="1"
+	            android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:text="@string/cmaera_setting"
+	    		android:onClick="setCameraOnclick"
+	            />
+	        <Button 
+	            android:id="@+id/btn_set_video"
+	            android:layout_weight="1"
+	            android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:text="@string/video_setting"
+	    		android:onClick="setVideoOnclick"
+	            />
+	        <Button 
+	            android:id="@+id/btn_set_common"
+	            android:layout_weight="1"
+	            android:layout_width="wrap_content"
+	    		android:layout_height="wrap_content"
+	    		android:text="@string/common_setting"
+	    		android:onClick="setCommonOnclick"
+	            />
+	    </LinearLayout>
+		<FrameLayout 
+		    android:id="@+id/fragment_content"
+	    	android:layout_width="match_parent"
+	    	android:layout_height="match_parent">
+	        
+		</FrameLayout>    
+	</LinearLayout>
+	    
+<!--  
+ 	
+	
+
+	-->
+</LinearLayout>

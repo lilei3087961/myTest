@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- 第一个切换卡 -->
+<ScrollView android:id="@+id/userface02_ScrollView"
+	android:layout_width="fill_parent" android:layout_height="wrap_content"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout android:id="@+id/info_linearLayout01"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:orientation="vertical">
+		<!-- 显示第一个区域 -->
+		<LinearLayout android:layout_width="fill_parent"
+			android:layout_height="wrap_content" android:orientation="horizontal"
+			android:background="@android:color/white">
+			<ImageView android:id="@+id/layout01_imageview"
+				android:layout_width="80dp" android:layout_height="60dp"
+				android:src="@drawable/ic_launcher" />
+
+			<TextView android:id="@+id/info_layout01_provience"
+				android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:text="广西" android:textSize="30sp" android:layout_marginLeft="50dp"
+
+				android:textColor="@android:color/white" />
+		</LinearLayout>
+		<TableLayout android:id="@+id/layout01_tablayout"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:orientation="vertical" android:stretchColumns="0,1,2,3,4,5">
+			<TableRow android:id="@+id/layout01_tabrow01"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:padding="5dp" 
+				android:orientation="horizontal">
+				<TextView android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:text=" 上报人：">
+				</TextView>
+				<TextView android:id="@+id/layout01_tabrow01_people"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="林挺">
+				</TextView>
+
+			</TableRow>
+			<TableRow android:id="@+id/layout01_tablerow02"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:padding="5dp" 
+				android:orientation="horizontal">
+				<TextView android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:text="上报手机：">
+				</TextView>
+				<TextView android:id="@+id/layout01_tabrow02_phone"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="12313424252">
+				</TextView>
+
+			</TableRow>
+			<TableRow android:id="@+id/layout01_tablerow03"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:padding="5dp"
+				android:orientation="horizontal">
+				<TextView android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:text="发生时间：">
+				</TextView>
+				<TextView android:id="@+id/layout01_tabrow03_time"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="12313424252">
+				</TextView>
+
+			</TableRow>
+			<TableRow android:id="@+id/layout01_tablerow04"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:padding="5dp" 
+				android:orientation="horizontal">
+				<TextView android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:text="坐      标：">
+				</TextView>
+				<TextView android:id="@+id/layout01_tabrow04_xy"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="12313424252">
+				</TextView>
+
+			</TableRow>
+			<TableRow android:id="@+id/layout01_tablerow05"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:padding="5dp" 
+				android:orientation="horizontal">
+				<TextView android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:text="类      型：">
+				</TextView>
+				<TextView android:id="@+id/layout01_tabrow05_type"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="12313424252">
+				</TextView>
+
+			</TableRow>
+			<TableRow android:id="@+id/layout01_tablerow06"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:padding="5dp" 
+				android:orientation="horizontal">
+				<TextView android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:text="内      容：">
+				</TextView>
+				<TextView android:id="@+id/layout01_tabrow06_context"
+					android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:text="12313424252">
+				</TextView>
+
+			</TableRow>
+
+		</TableLayout>
+	</LinearLayout>
+</ScrollView>

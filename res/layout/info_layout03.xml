@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- 第三个切换卡 -->
+	<LinearLayout 
+		android:id="@+id/info_linearLayout03"
+		android:layout_width="fill_parent" 
+		android:layout_height="fill_parent"
+		android:orientation="vertical" 
+		xmlns:android="http://schemas.android.com/apk/res/android">
+	<LinearLayout 
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content" 
+			android:orientation="horizontal"
+			android:background="@android:color/white"
+			>
+			<ImageView 
+				android:id="@+id/info_layout03_imageview"
+				android:layout_width="80dp" 
+				android:layout_height="60dp"
+				android:src="@drawable/ic_launcher" />
+
+			<TextView 
+				android:id="@+id/info_layout03_provience"
+				android:layout_width="wrap_content" 
+				android:layout_height="wrap_content"
+				android:text="广西" 
+				android:textSize="30sp" 
+				android:layout_marginLeft="50dp"
+				android:textColor="@android:color/black" />
+		</LinearLayout>
+	
+		<ListView 
+			android:id="@+id/info_layout03_listview"
+			android:layout_width="fill_parent" 
+			android:layout_height="fill_parent"
+			android:layout_weight="1">
+		</ListView>
+		<Button 
+			android:id="@+id/layout03_downbutton"
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content"
+			android:text="按钮" 
+			android:layout_gravity="right"
+			android:layout_alignParentRight="true" 
+			android:layout_alignParentTop="true"
+			>
+		</Button>
+
+	</LinearLayout>

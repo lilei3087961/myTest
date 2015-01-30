@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    >
+	    <Button 
+	        android:id="@+id/btn_toggle_led"
+	        android:text="@string/toggleled"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:onClick="btnshowOnClick"
+	        />
+	    <!-- 
+	    		      	android:marqueeRepeatLimit="marquee_forever"
+
+        	android:scrollHorizontally="true"
+	    
+	     -->
+	    <TextView 
+		        android:id="@+id/btn_toggle_led2"
+		        android:text="@string/activity_image_animate"
+		        android:layout_width="100px"
+		       	android:layout_height="wrap_content"
+		        android:singleLine="true"
+		        android:selectAllOnFocus="true"
+		    	android:ellipsize="marquee"
+		   		android:focusable="true" 
+        		android:focusableInTouchMode="true" 
+        	
+	        />
+	    	    <TextView 
+	        android:id="@+id/txt1"
+	        android:text="@string/activity_image_animate"
+	        android:layout_width="100px"
+	        android:singleLine="true"
+	    	android:layout_height="wrap_content"
+	        />
+	</LinearLayout>
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.mytest.ui.SlideView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout 
+            android:id="@+id/slide_view"
+            android:layout_width="50dip"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+        >
+           <ImageView android:id="@+id/image1"
+                android:layout_width="wrap_content"
+                android:layout_height="45dip"
+                android:src="@drawable/preview_thumb"/>
+           <ImageView android:id="@+id/slide_image"
+                android:layout_width="wrap_content"
+                android:layout_height="45dip"
+                android:src="@drawable/yixi_image_to_hide"/>
+           
+        
+    </LinearLayout>
+
+</com.example.mytest.ui.SlideView>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array  name="array_test">
+      <item>test tabhost</item>
+      <item>test camera</item>
+      <item>test fragments tabhost</item>
+      <item>test image animate</item>
+      <item>test led flash</item>
+    </string-array>
+    <string-array  name="array_camera">
+      <item>camera list item1</item>
+      <item>camera list item2</item>
+      <item>camera list item3</item>
+    </string-array>
+    <string-array  name="array_video">
+      <item>video list item1</item>
+      <item>video list item2</item>
+      <item>video list item3</item>
+    </string-array>
+</resources>

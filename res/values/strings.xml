@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">myTest</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_world2">Hello world222</string>
+    <string name="action_settings">Settings</string>
+    <string name="activity_camera">Camera</string>
+    <string name="cmaera_setting">cmaera setting</string>
+    <string name="video_setting">video setting</string>
+    <string name="common_setting">common setting</string>
+    <string name="show_pop">show pop</string>
+    <string name="hide_pop">hide pop</string>
+    <string name="show_image_animate">show image animate</string>
+    <string name="activity_tab_test">ActivityForTabTest</string>
+    <string name="activity_image_animate">activity image animate</string>
+    <string name="str_fragmentment1">str_fragmentment1</string>
+    <string name="str_fragmentment2">str_fragmentment2</string>
+    <string name="btn1">btn1</string>
+    <string name="toggleled">toggle led</string>
+</resources>
