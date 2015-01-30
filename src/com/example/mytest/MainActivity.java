@@ -60,7 +60,7 @@ public class MainActivity extends ActionBarActivity{
         mStrArray = getResources().getStringArray(R.array.array_test);
         ArrayAdapter<String> arraryAdapter= new ArrayAdapter<String>(this,R.layout.simple_list_item_textview,mStrArray);
         if(mListView == null || arraryAdapter == null){
-        	Log.i("lilei","MainActivity mListView:"+mListView+" arraryAdapter:"+arraryAdapter);
+        	Log.i("lilei","~~~ MainActivity mListView:"+mListView+" arraryAdapter:"+arraryAdapter);
         	return;
         }
         mListView.setAdapter(arraryAdapter);
