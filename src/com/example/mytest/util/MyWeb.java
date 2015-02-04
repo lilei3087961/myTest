@@ -23,10 +23,12 @@ import android.util.Log;
 
 public class MyWeb {
 	static final String TAG ="lilei";
+	static String mUrl;
 	static List<HashMap<String, Object>> mMapList;
 	static HashMap<String, Object> mHashMap;
-	public static List<HashMap<String, Object>>  getWebService() {
+	public static List<HashMap<String, Object>>  getWebLogin(String name) {
 		String result = "";
+		mUrl = "http://adam.icobbler.com/getLogin.php"+((name == null || name.equals("") )? "":"?name="+name);
 		mMapList = new ArrayList<HashMap<String,Object>>();
 		// 首先使用NameValuePair封装将要查询的年数和关键字绑定
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -36,7 +38,7 @@ public class MyWeb {
 		InputStream is = null;
 		try {
 			HttpClient httpclient = new DefaultHttpClient();
-			HttpPost httppost = new HttpPost("http://adam.icobbler.com/");
+			HttpPost httppost = new HttpPost(mUrl);
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			HttpResponse response = httpclient.execute(httppost);
 			HttpEntity entity = response.getEntity();

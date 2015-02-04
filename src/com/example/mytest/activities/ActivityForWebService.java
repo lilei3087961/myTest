@@ -30,11 +30,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 public class ActivityForWebService extends Activity {
 	Button btnGetService;
+	EditText editName;
 	Handler mHandler = new MainHandler();
 	Thread mThread;
 	ListView mListView;
@@ -53,6 +55,7 @@ public class ActivityForWebService extends Activity {
 	}
 
 	void initView() {
+		editName = (EditText)findViewById(R.id.edit_name);
 		btnGetService = (Button) findViewById(R.id.btnGetService);
 		btnGetService.setOnClickListener(new OnClickListener() {
 			@Override
@@ -62,7 +65,8 @@ public class ActivityForWebService extends Activity {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						mMapList = MyWeb.getWebService();
+						Log.i("lilei", "editName:"+editName.getText().toString().trim());
+						mMapList = MyWeb.getWebLogin(editName.getText().toString().trim());
 						mHandler.sendEmptyMessage(UPDATE_LISTVIEW);
 					}
 				});

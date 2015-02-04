@@ -4,13 +4,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-        <Button 
-            android:id="@+id/btnGetService"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/str_get_service"
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="please input name to serarch"
+                android:layout_weight="1"
             />
-        <ListView 
+            <Button
+	            android:id="@+id/btnGetService"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:text="@string/str_get_service"
+	            android:layout_weight="1"
+            />
+        </LinearLayout>
+        <ListView
 	        android:id="@+id/list_service"    
 	        android:layout_width="match_parent" 
 	        android:layout_height="wrap_content" 

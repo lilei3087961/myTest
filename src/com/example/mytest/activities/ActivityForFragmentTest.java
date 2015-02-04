@@ -43,7 +43,6 @@ public class ActivityForFragmentTest extends Activity {
 	}
 	public void showPop(View view){
 
-
 		LayoutInflater mLayoutInflater = getLayoutInflater();
 		View mView = mLayoutInflater.inflate(R.layout.simple_textview2,null);
 		//TextView tv =  (TextView)findViewById(R.id.txt2);
@@ -52,13 +51,17 @@ public class ActivityForFragmentTest extends Activity {
 //		mPopup.showAsDropDown(btnPop);
 //		if(true)
 //			return;
-		mPopup = new PopupWindow(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		mPopup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        mPopup.setOutsideTouchable(true);
-        mPopup.setFocusable(true);
-        //((ViewGroup)popView.getParent()).removeView(popView);
-        mPopup.setContentView(popView);//popView
-        mPopup.showAsDropDown(btnPop);
+		if(mPopup == null){
+			mPopup = new PopupWindow(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			mPopup.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+	        mPopup.setOutsideTouchable(true);
+	        mPopup.setFocusable(true);
+	        if(popView.getParent() != null)
+	        	((ViewGroup)popView.getParent()).removeView(popView);
+	        mPopup.setContentView(popView);//popView
+		}
+		if(!mPopup.isShowing())
+			mPopup.showAsDropDown(btnPop);
         //mPopup.showAtLocation(btnPop, Gravity.TOP, 0, 0);
 	}
 	public void showPopAddView(View view){
