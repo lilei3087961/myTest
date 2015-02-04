@@ -6,6 +6,7 @@
       <item>test fragments tabhost</item>
       <item>test image animate</item>
       <item>test led flash</item>
+      <item>test web service</item>
     </string-array>
     <string-array  name="array_camera">
       <item>camera list item1</item>

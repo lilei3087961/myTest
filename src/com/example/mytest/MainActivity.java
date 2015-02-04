@@ -6,6 +6,7 @@ import com.example.mytest.activities.ActivityForFragmentTest;
 import com.example.mytest.activities.ActivityForImageAnimate;
 import com.example.mytest.activities.ActivityForLedFlash;
 import com.example.mytest.activities.ActivityForTabHostTest;
+import com.example.mytest.activities.ActivityForWebService;
 import com.example.mytest.fragments.MyFragmentManager.MainFragment;
 import com.example.mytest.ui.OnScreenHint;
 
@@ -90,6 +91,9 @@ public class MainActivity extends ActionBarActivity{
                         intent = new Intent(MainActivity.this,ActivityForLedFlash.class);
                         startActivity(intent);
                         break;
+					case 5:
+						intent = new Intent(MainActivity.this,ActivityForWebService.class);
+                        startActivity(intent);
 					default:
 						break;
 				}
