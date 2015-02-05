@@ -1,8 +1,13 @@
 package com.example.mytest.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +24,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 
 public class MyWeb {
@@ -26,6 +33,7 @@ public class MyWeb {
 	static String mUrl;
 	static List<HashMap<String, Object>> mMapList;
 	static HashMap<String, Object> mHashMap;
+	//获取服务端数据库
 	public static List<HashMap<String, Object>>  getWebLogin(String name) {
 		String result = "";
 		mUrl = "http://adam.icobbler.com/getLogin.php"+((name == null || name.equals("") )? "":"?name="+name);
@@ -79,5 +87,43 @@ public class MyWeb {
 			Log.e(TAG, "Error parsing data " + e.toString());
 		}
 		return mMapList;
+	}
+	
+	//获取网络ip
+	public static String GetNetIp()
+	{
+	    URL infoUrl = null;
+	    InputStream inStream = null;
+	    try
+	    {
+	    	//http://www.ip138.com/
+	        infoUrl = new URL("http://1111.ip138.com/ic.asp");//http://iframe.ip138.com/ic.asp
+	        URLConnection connection = infoUrl.openConnection();
+	        HttpURLConnection httpConnection = (HttpURLConnection)connection;
+	        int responseCode = httpConnection.getResponseCode();
+	        if(responseCode == HttpURLConnection.HTTP_OK){
+	            inStream = httpConnection.getInputStream();
+	            //gbk follow web encode
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(inStream,"gbk"));
+	            StringBuilder strber = new StringBuilder();
+	            String line = null;
+	            while ((line = reader.readLine()) != null){
+	                strber.append(line + "\n");
+	            }
+	            inStream.close();
+	            //从反馈的结果中提取出IP地址
+	            int start = strber.indexOf("[");
+	            int end = strber.indexOf("]", start + 1);
+	            line = strber.substring(start + 1, end);
+	            return line; 
+	        }
+	    }
+	    catch(MalformedURLException e) {
+	        e.printStackTrace();
+	    }
+	    catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
 }

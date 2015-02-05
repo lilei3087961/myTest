@@ -33,18 +33,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 public class ActivityForWebService extends Activity {
 	Button btnGetService;
+	TextView txtIp;
 	EditText editName;
 	Handler mHandler = new MainHandler();
 	Thread mThread;
 	ListView mListView;
 	SimpleAdapter mSimpleAdapter;
 	List<HashMap<String, Object>> mMapList;
+	String mIp;
 	String[] mMapKeys;
 	int[] mResIds;
 	private static final int UPDATE_LISTVIEW = 1;
+	private static final int UPDATE_IP_TEXTVIEW = 2;
 	static final String TAG ="lilei";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,16 @@ public class ActivityForWebService extends Activity {
 	}
 
 	void initView() {
+		txtIp = (TextView)findViewById(R.id.txt_ip);
+		mThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				mIp = MyWeb.GetNetIp();
+				mHandler.sendEmptyMessage(UPDATE_IP_TEXTVIEW);
+			}
+		});
+		mThread.start();
 		editName = (EditText)findViewById(R.id.edit_name);
 		btnGetService = (Button) findViewById(R.id.btnGetService);
 		btnGetService.setOnClickListener(new OnClickListener() {
@@ -82,6 +96,9 @@ public class ActivityForWebService extends Activity {
 			switch (msg.what) {
 			case UPDATE_LISTVIEW:
 				updateListview();
+				break;
+			case UPDATE_IP_TEXTVIEW:
+				txtIp.setText("current ip is:"+mIp);
 				break;
 			default:
 				break;
