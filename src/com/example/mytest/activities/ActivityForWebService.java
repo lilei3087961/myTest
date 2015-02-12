@@ -36,7 +36,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 public class ActivityForWebService extends Activity {
-	Button btnGetService;
+	Button btnGetUsers;
 	TextView txtIp;
 	EditText editName;
 	Handler mHandler = new MainHandler();
@@ -70,8 +70,8 @@ public class ActivityForWebService extends Activity {
 		});
 		mThread.start();
 		editName = (EditText)findViewById(R.id.edit_name);
-		btnGetService = (Button) findViewById(R.id.btnGetService);
-		btnGetService.setOnClickListener(new OnClickListener() {
+		btnGetUsers = (Button) findViewById(R.id.btnGetUsers);
+		btnGetUsers.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stubs

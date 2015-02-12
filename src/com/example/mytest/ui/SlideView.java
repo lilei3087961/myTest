@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -23,6 +24,12 @@ public class SlideView extends RelativeLayout {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
 		
+	}
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+		// TODO Auto-generated method stub
+		Log.i("lilei", "SlideView.onTouchEvent()");
+		return super.onTouchEvent(event);
 	}
 	@Override
 	protected void onFinishInflate() {

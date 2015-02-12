@@ -22,10 +22,10 @@
                 android:layout_weight="1"
             />
             <Button
-	            android:id="@+id/btnGetService"
+	            android:id="@+id/btnGetUsers"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:text="@string/str_get_service"
+	            android:text="@string/str_get_users"
 	            android:layout_weight="1"
             />
         </LinearLayout>

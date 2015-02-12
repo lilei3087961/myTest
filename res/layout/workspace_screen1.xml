@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--      android:background="#ff00ff00"-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff00ff00"
+    android:orientation="horizontal"
+    android:hapticFeedbackEnabled="false">
+    <Button 
+        android:id="@+id/btn_left"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="scroll left"
+        />
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="txt2"
+        />
+    <Button
+        android:id="@+id/btn_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="srollRight"
+        />
+</LinearLayout>

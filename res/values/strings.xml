@@ -18,5 +18,7 @@
     <string name="str_fragmentment2">str_fragmentment2</string>
     <string name="btn1">btn1</string>
     <string name="toggleled">toggle led</string>
+    <string name="toggTabHost">toggle tabHost</string>
     <string name="str_get_service">get service</string>
+    <string name="str_get_users">get users</string>
 </resources>

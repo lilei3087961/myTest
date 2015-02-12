@@ -71,6 +71,13 @@
             <intent-filter>
             </intent-filter>
         </activity>
+         <activity
+            android:name="com.example.mytest.activities.ActivityForPageView"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

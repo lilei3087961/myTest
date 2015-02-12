@@ -68,12 +68,11 @@ public class ActivityForFragmentTest extends Activity {
 		LayoutInflater mLayoutInflater = getLayoutInflater();
 		//popView = mLayoutInflater.inflate(R.layout.activity_for_fragment_pop,null);
 		popView = (View)findViewById(R.id.pop_view);
-		((ViewGroup)popView.getParent()).removeView(popView);
-		content1.addView(popView);
+		popView.setVisibility(View.VISIBLE);
 	}
 	public void hidePop(View view){
-		
-		content1.removeView(popView);
+		//content1.removeView(popView);
+		popView.setVisibility(View.GONE);
 	}
 	public void setCameraOnclick(View view){
 		Log.i("lilei", "setCameraOnclick");

@@ -5,6 +5,7 @@ import com.example.mytest.activities.ActivityForCameraTest;
 import com.example.mytest.activities.ActivityForFragmentTest;
 import com.example.mytest.activities.ActivityForImageAnimate;
 import com.example.mytest.activities.ActivityForLedFlash;
+import com.example.mytest.activities.ActivityForPageView;
 import com.example.mytest.activities.ActivityForTabHostTest;
 import com.example.mytest.activities.ActivityForWebService;
 import com.example.mytest.fragments.MyFragmentManager.MainFragment;
@@ -93,6 +94,9 @@ public class MainActivity extends ActionBarActivity{
                         break;
 					case 5:
 						intent = new Intent(MainActivity.this,ActivityForWebService.class);
+                        startActivity(intent);
+					case 6:
+						intent = new Intent(MainActivity.this,ActivityForPageView.class);
                         startActivity(intent);
 					default:
 						break;
