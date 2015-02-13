@@ -68,13 +68,22 @@ import com.example.mytest.R;
  * Each page contains a number of icons, folders or widgets the user can
  * interact with. A workspace is meant to be used with a fixed width only.
  */
-public class Workspace extends ViewGroup implements View.OnTouchListener,ViewGroup.OnHierarchyChangeListener {
+public class Workspace extends ViewGroup{
 	ViewGroup mLayout1;
 	ViewGroup mLayout2;
 	Context mContext;
 	Button mButton;
 	Button btnLeft;
 	Button btnRight;
+	int mCurrentPage = 0;
+	int mScrollX;
+	float mDownMotionX;
+	float mLastMotionX;
+	float mUpMotionX;
+	float mTotalMotionX;
+    static final int INVALID_POINTER = -1;
+    int mActivePointerId = INVALID_POINTER;
+	static final String TAG = "lilei"; 
 	public Workspace(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
@@ -90,7 +99,7 @@ public class Workspace extends ViewGroup implements View.OnTouchListener,ViewGro
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				srollRight(null);
+				srollRight();
 				//srollLeft(null);
 			}
 		});
@@ -99,61 +108,97 @@ public class Workspace extends ViewGroup implements View.OnTouchListener,ViewGro
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				srollLeft(null);
+				srollLeft();
 				//srollRight(null);
 			}
 		});
-		Log.i("lilei","syncPages() mLayout1:"+mLayout1+" mLayout2:"+mLayout2);
+		Log.i(TAG,"syncPages() mLayout1:"+mLayout1+" mLayout2:"+mLayout2);
 		this.addView(mLayout2);
 		this.addView(mLayout1);
 	}
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
-		 Log.i("liliei", "~~00 onInterceptTouchEvent()");
+		final int action = ev.getAction();
+		 String state = "";
+	        int mask = action & MotionEvent.ACTION_MASK;
+	        switch (mask){
+	        case MotionEvent.ACTION_DOWN:
+	        	state = "ACTION_DOWN";
+	        	break;
+	        case MotionEvent.ACTION_MOVE:
+	        	state = "ACTION_MOVE";
+	        	break;
+	        case MotionEvent.ACTION_UP:
+	        	state = "ACTION_UP";
+	        	break;
+	        }
+	        boolean result = super.onInterceptTouchEvent(ev);
+		 Log.i(TAG, "onInterceptTouchEvent()  mask:"+mask+" state:"+state+" return:"+result);
 		return super.onInterceptTouchEvent(ev);
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		// TODO Auto-generated method stub
-		 Log.i("lilei", "~~11 onTouchEvent()");
-		 return super.onTouchEvent(event);
-	}
-	@Override
-	public void onChildViewAdded(View arg0, View arg1) {
-		// TODO Auto-generated method stub
-		
+		 final int action = event.getAction();
+		 switch (action & MotionEvent.ACTION_MASK) {
+        	case MotionEvent.ACTION_DOWN:
+        		mActivePointerId = event.getPointerId(0);
+        		mDownMotionX = mLastMotionX = event.getX();
+        		
+        		break;
+        	case MotionEvent.ACTION_MOVE:
+        		break;
+        	case MotionEvent.ACTION_UP:
+        		final int activePointerId = mActivePointerId;
+                final float x = event.getX(activePointerId);
+                final int deltaX = (int) (x - mDownMotionX);
+                srollPage(deltaX);
+        		break;
+        	
+        };
+		 String state = "";
+	        int mask = action & MotionEvent.ACTION_MASK;
+	        switch (mask){
+	        case MotionEvent.ACTION_DOWN:
+	        	state = "ACTION_DOWN";
+	        	break;
+	        case MotionEvent.ACTION_MOVE:
+	        	state = "ACTION_MOVE";
+	        	break;
+	        case MotionEvent.ACTION_UP:
+	        	state = "ACTION_UP";
+	        	break;
+	        }
+	        boolean result = super.onInterceptTouchEvent(event);
+		 Log.i(TAG, "~~11 onTouchEvent() mask:"+mask+" state:"+state+" result:"+result);
+		 
+		 return true;
 	}
 
-	@Override
-	public void onChildViewRemoved(View arg0, View arg1) {
-		// TODO Auto-generated method stub
-		
+	public void srollLeft(){
+		mScrollX = getChildAt(mCurrentPage).getMeasuredWidth();
+		this.scrollBy(-mScrollX, 0);
+		Log.i(TAG, "srollLeft:"+mScrollX);
 	}
-
-	@Override
-	public boolean onTouch(View arg0, MotionEvent arg1) {
-		// TODO Auto-generated method stub
-		int action = arg1.getAction();
-		Log.i("liliei", "onTouch() action:"+action);
-		if(action == MotionEvent.ACTION_UP){
-			srollRight(null);
+	public void srollRight(){
+		mScrollX = getChildAt(mCurrentPage).getMeasuredWidth();
+		this.scrollBy(mScrollX, 0);
+		
+		Log.i(TAG, "srollRight:"+mScrollX);
+	}
+	public void srollPage(int deltax){
+		if(deltax>0){
+			srollLeft();
+		}else if(deltax<0){
+			srollRight();
 		}
-		return false;
-	}
-
-	public void srollLeft(View view){
-		this.scrollBy(100, 0);
-		Log.i("lilei", "srollLeft");
-	}
-	public void srollRight(View view){
-		this.scrollBy(-100, 0);
-		Log.i("lilei", "srollRight");
+		Log.i("lilei", "srollPage deltax:"+deltax);
 	}
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		// TODO Auto-generated method stub
-		Log.i("lilei", "onMeasure:");
+		Log.i(TAG, "onMeasure:");
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		final int count = getChildCount();
         for (int i = 0; i < count; i++) {
@@ -163,13 +208,13 @@ public class Workspace extends ViewGroup implements View.OnTouchListener,ViewGro
 	@Override
 	protected void onLayout(boolean arg0, int arg1, int arg2, int arg3, int arg4) {
 		// TODO Auto-generated method stub
-		Log.i("lilei", "arg0:"+arg0+" arg1:"+arg1+" arg2:"+arg2+" arg3:"+arg3+" arg4:"+arg4);
+		Log.i(TAG, "arg0:"+arg0+" arg1:"+arg1+" arg2:"+arg2+" arg3:"+arg3+" arg4:"+arg4);
 		int childLeft = 0;
 		int width =  arg3;
 		for(int i=0;i<getChildCount();i++){
 			View child = getChildAt(i);
 			child.layout(childLeft, arg2, childLeft+width, arg4);
-			Log.i("lilei", "i:"+i+" getMeasuredWidth:"+child.getMeasuredWidth()+" getWidth:"+child.getWidth()+
+			Log.i(TAG, "i:"+i+" getMeasuredWidth:"+child.getMeasuredWidth()+" getWidth:"+child.getWidth()+
 					" childLeft:"+childLeft);
 			childLeft += width;
 
