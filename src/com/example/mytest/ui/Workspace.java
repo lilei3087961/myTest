@@ -210,7 +210,7 @@ public class Workspace extends ViewGroup{
 		Log.i(TAG, "srollLeft:"+mScrollX);
 	}
 	public void srollPage(int deltax){
-		Log.i("lilei","srollPage() mCurrentPage:"+mCurrentPage);
+		Log.i("lilei","**srollPage() mCurrentPage:"+mCurrentPage);
 		int currWidth = getChildAt(mCurrentPage).getMeasuredWidth();
 		int originX = (int)getChildAt(mCurrentPage).getX();
 		int nextPageX;
