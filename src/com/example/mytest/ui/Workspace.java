@@ -75,12 +75,13 @@ public class Workspace extends ViewGroup{
 	Button mButton;
 	Button btnLeft;
 	Button btnRight;
-	int mCurrentPage = 0;
+	static int mCurrentPage = 0;
 	int mScrollX;
 	float mDownMotionX;
 	float mLastMotionX;
 	float mUpMotionX;
 	float mTotalMotionX;
+	float mLastMotionXRemainder;
     static final int INVALID_POINTER = -1;
     int mActivePointerId = INVALID_POINTER;
 	static final String TAG = "lilei"; 
@@ -99,7 +100,7 @@ public class Workspace extends ViewGroup{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				srollRight();
+				srollLeft();
 				//srollLeft(null);
 			}
 		});
@@ -108,7 +109,7 @@ public class Workspace extends ViewGroup{
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				srollLeft();
+				srollRight();
 				//srollRight(null);
 			}
 		});
@@ -124,6 +125,7 @@ public class Workspace extends ViewGroup{
 	        int mask = action & MotionEvent.ACTION_MASK;
 	        switch (mask){
 	        case MotionEvent.ACTION_DOWN:
+                mTotalMotionX = 0;
 	        	state = "ACTION_DOWN";
 	        	break;
 	        case MotionEvent.ACTION_MOVE:
@@ -133,9 +135,9 @@ public class Workspace extends ViewGroup{
 	        	state = "ACTION_UP";
 	        	break;
 	        }
-	        boolean result = super.onInterceptTouchEvent(ev);
-		 Log.i(TAG, "onInterceptTouchEvent()  mask:"+mask+" state:"+state+" return:"+result);
-		return super.onInterceptTouchEvent(ev);
+	        //boolean result = super.onInterceptTouchEvent(ev);
+		 Log.i(TAG, "onInterceptTouchEvent() false mask:"+mask+" state:"+state);//+" return:"+result);
+		return false;//super.onInterceptTouchEvent(ev);
 	}
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -148,6 +150,7 @@ public class Workspace extends ViewGroup{
         		
         		break;
         	case MotionEvent.ACTION_MOVE:
+        		initiateScroll(event);
         		break;
         	case MotionEvent.ACTION_UP:
         		final int activePointerId = mActivePointerId;
@@ -156,10 +159,10 @@ public class Workspace extends ViewGroup{
                 srollPage(deltaX);
         		break;
         	
-        };
+		 }
 		 String state = "";
-	        int mask = action & MotionEvent.ACTION_MASK;
-	        switch (mask){
+        int mask = action & MotionEvent.ACTION_MASK;
+        switch (mask){
 	        case MotionEvent.ACTION_DOWN:
 	        	state = "ACTION_DOWN";
 	        	break;
@@ -169,31 +172,80 @@ public class Workspace extends ViewGroup{
 	        case MotionEvent.ACTION_UP:
 	        	state = "ACTION_UP";
 	        	break;
-	        }
-	        boolean result = super.onInterceptTouchEvent(event);
-		 Log.i(TAG, "~~11 onTouchEvent() mask:"+mask+" state:"+state+" result:"+result);
+        }
+        //boolean result = super.onTouchEvent(event);
+		 Log.i(TAG, "~~11 onTouchEvent() true mask:"+mask+" state:"+state+" getScrollX:"+this.getScrollX()+
+				 " mTotalMotionX:"+mTotalMotionX);//+" result:"+result);
 		 
 		 return true;
 	}
-
-	public void srollLeft(){
-		mScrollX = getChildAt(mCurrentPage).getMeasuredWidth();
-		this.scrollBy(-mScrollX, 0);
-		Log.i(TAG, "srollLeft:"+mScrollX);
+	void initiateScroll(MotionEvent ev) {
+        final int pointerIndex = ev.findPointerIndex(mActivePointerId);
+        final float x = ev.getX(pointerIndex);
+        final float deltaX = mLastMotionX + mLastMotionXRemainder - x;
+        mTotalMotionX += Math.abs(deltaX);
+        if (Math.abs(deltaX) >= 1.0f) {
+        	Log.i(TAG, "initiateScroll() deltaX:"+((int) deltaX));
+        	scrollBy((int) deltaX);
+            mLastMotionX = x;
+            mLastMotionXRemainder = deltaX - (int) deltaX;
+        }
+	}
+	public void scrollBy(int x) {
+		this.scrollBy(x,0);
+	}
+	public void scrollTo(int x) {
+		this.scrollTo(x,0);
 	}
 	public void srollRight(){
 		mScrollX = getChildAt(mCurrentPage).getMeasuredWidth();
+
+		this.scrollBy(-mScrollX, 0);
+		Log.i(TAG, "srollRight:-"+mScrollX);
+	}
+	public void srollLeft(){
+		mScrollX = getChildAt(mCurrentPage).getMeasuredWidth();
 		this.scrollBy(mScrollX, 0);
 		
-		Log.i(TAG, "srollRight:"+mScrollX);
+		Log.i(TAG, "srollLeft:"+mScrollX);
 	}
 	public void srollPage(int deltax){
+		Log.i("lilei","srollPage() mCurrentPage:"+mCurrentPage);
+		int currWidth = getChildAt(mCurrentPage).getMeasuredWidth();
+		int originX = (int)getChildAt(mCurrentPage).getX();
+		int nextPageX;
+		int prePageX;
+		int currScrollX = this.getScrollX();
+		int newScrollX = 0;
+		Log.i("lilei","srollPage:"+deltax+" currScrollX:"+currScrollX+" originX:"+originX+" currWidth:"+currWidth);
 		if(deltax>0){
-			srollLeft();
-		}else if(deltax<0){
-			srollRight();
+			if(Math.abs(deltax)>0.4*currWidth){
+				mCurrentPage = mCurrentPage-1 <= 0 ? 0:(mCurrentPage-1);
+				prePageX = (int) getChildAt(mCurrentPage).getX();
+				Log.i("lilei","srollPage 111 mCurrentPage:"+mCurrentPage+" prePageX:"+prePageX);
+				scrollTo(prePageX);
+				newScrollX = currScrollX - currWidth;
+			}else{
+				scrollTo(originX);
+				Log.i("lilei","srollPage 222");
+			}
+			//srollRight();
+		}else if(deltax<0){  //scroll left
+			if(Math.abs(deltax)>0.4*currWidth){
+				newScrollX = currWidth - currScrollX;
+				mCurrentPage = mCurrentPage+1 >= getChildCount()? (getChildCount()-1):(mCurrentPage+1);
+				nextPageX = (int) getChildAt(mCurrentPage).getX();
+				Log.i("lilei","srollPage 333 mCurrentPage:"+mCurrentPage+" nextPageX:"+nextPageX);
+				scrollTo(nextPageX);
+			}else{
+				Log.i("lilei","srollPage 444 originX:"+originX);
+				scrollTo(originX);
+				newScrollX = -currScrollX;
+			}
+			//srollLeft();
 		}
-		Log.i("lilei", "srollPage deltax:"+deltax);
+//		Log.i("lilei","srollPage: newScrollX:"+newScrollX);
+//		scrollBy(newScrollX);
 	}
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
